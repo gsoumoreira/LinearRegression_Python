@@ -61,6 +61,12 @@ pl.plot2D(popci,y)
 #% Setting the Collum Ones as for the future Thetha 0 multiplication
 x = data.loc[:,["new",0]]
 
+# Number of features (columns)
+num_of_feat = len(x.columns)
+
+# reseting the feature index
+x.columns = list(range(num_of_feat))
+
 # Important gradient descent settings
 iterations = 1500
 alpha = 0.01

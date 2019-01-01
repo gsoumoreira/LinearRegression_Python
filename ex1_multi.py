@@ -55,12 +55,13 @@ import featureNormalize as fn
  
 import plotData as pl
 
-plot = pl.plot2D(x_norm,y)
+dataPlot = pl.plot2D(x_norm,y)
+dataPlot.set_title("Profit and Population")
 
 #%% Part 4 - Gradient Descent for n-Features
 
 import numpy as np
-import gradientDescentMulti as gd
+import gradientDescent as gd
 
 # Inserting the first column X0 with the ones
 x_norm.insert(loc=0, column=2, value=np.ones(m))
@@ -69,7 +70,7 @@ x_norm.insert(loc=0, column=2, value=np.ones(m))
 num_of_feat = len(x_norm.columns)
 num_of_train = len(x_norm)
 
-# reseting the index
+# reseting the feature index
 x_norm.columns = list(range(num_of_feat))
 
 # Variables for Gradient Descent
@@ -77,9 +78,14 @@ alpha = 0.01
 num_iters = 400
 theta_0 = pd.DataFrame(np.zeros([num_of_feat,1]))
 
-[theta,Jhist] = gd.gradientDescentMulti(x_norm,y,theta_0,alpha,num_iters)
+# Gradient Descent and Cost Function History
+[theta,Jhist] = gd.gradientDescent(x_norm,y,theta_0,alpha,num_iters)
 
+#%% Part 5 - Plotting the Learning Curve
+
+# Iterations list values
 iterations = pd.DataFrame(list(range(num_iters)))
 
+# Plot the learning curve
 plot = pl.plot2D(iterations,Jhist)
 
