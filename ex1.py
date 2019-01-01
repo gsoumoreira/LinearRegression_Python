@@ -35,12 +35,17 @@ pathtodata = 'Exercise_Data/ex1_Data.txt'
 
 data = pd.read_csv(pathtodata,delimiter = ',',header=None) # data is DataFrame object (Table format)
 
+# Variable with collum 1 index values OBS: Use two brackets to represent the 2D matrix correctly (Profit of the food truck of each city)
+y = data[[1]]
+# Number of training examples 
+m = len(y) 
+
 # It is important to set the variables regarding your project. Following the course we can set (x,y) and the number of training examples
+# Adding a new collum with only ones (For use Linear Regression later)
+data["new"] = np.ones(m)
 
-x = data[0] # Variable with collum 0 values
-y = data[1] # Variable with collum 1 values
-m = len(y) # Number of training examples
-
+# Variable with collum index 0 values (Population of the Cities)
+popci = pd.DataFrame(data.loc[:,0])
 
 #%% Part 3 - Plotting the Exercising Data
 
@@ -49,16 +54,45 @@ m = len(y) # Number of training examples
 
 import plotData as pl
 
-pl.plotData(x,y)
+pl.plot2D(popci,y)
 
 #%% Part 3 - Cost and Gradient descent
 
-#% Add a column of ones to x
-newcol = np.ones(m)
-newX = x.insert(newcol)
+#% Setting the Collum Ones as for the future Thetha 0 multiplication
+x = data.loc[:,["new",0]]
 
-# Initialize fitting parameters
+# Important gradient descent settings
+iterations = 1500
+alpha = 0.01
+
+# Initialize fitting parameters 
+theta0 = pd.DataFrame([0,0])
+theta1 = pd.DataFrame([-1,2])
+
+# Compute and display initial cost (Choosing the theta values)
+
+import computeCost as cc
+
+J = cc.computeCost(x,y,theta1)
+
+print("The cost function or total error using is = {0}".format(J))
+
+# Run gradient descent
+
+# Number of training examples (J_history)
+
+import gradientDescent as gd
+
+[bestHip,Jhist] = gd.gradientDescent(x,y,theta0,alpha,iterations)
+
+import matplotlib.pyplot as plt
+
+fig = plt.figure(figsize=(5,4),dpi=80) 
+axes = fig.add_axes([0,0,1,1])
+axes.plot(popci,y, label='Data',color='red',linewidth=0,linestyle='--', alpha=1, marker='x', markersize=5, markerfacecolor='red', markeredgewidth=1, markeredgecolor='red')
+axes.plot(popci,np.dot(x,bestHip), label='Data',color='blue',linewidth=1)
 
 
-
-
+    
+# Save the cost J in every iteration
+#Jhist = cc.computeCost(x, y, theta);

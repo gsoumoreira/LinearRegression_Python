@@ -3,15 +3,20 @@
 """
 Created on Thu Dec 20 17:20:34 2018
 
-In Pyhton it is easy to import libraries. For plotting we will use matplotlib
-which is the most popular plotting library for python (It was designed to have similar feel to MatLab's graphical plotting)
+For plotting we will use matplotlib which is the most popular library for
+cientific plot (It was designed to have similar feel to MatLab's graphical
+plotting)
 
 @author: gabi
 """
 
-import matplotlib.pyplot as plt
+def plot2D(x,y):
+    
+    import matplotlib.pyplot as plt
+    import numpy as np
 
-def plotData(x,y):
+    # Calculate the number of features (collumns)
+    num_of_feat = len(x.columns)
     
 # Creatting a Figure obect (Which is interesting for manipulation) dpi changes the basic unit size
     fig = plt.figure(figsize=(5,4),dpi=80) 
@@ -20,15 +25,20 @@ def plotData(x,y):
     axes = fig.add_axes([0,0,1,1])
 
 # Setting title and axis labels
-    axes.set_title("Trainning Examples ex1")
+    axes.set_title("Title 1")
     axes.set_xlabel("x values")
     axes.set_ylabel("y values")
     
-# Plotting the data - There are many options for graphs style, you can manipulate and change as you want
-    axes.plot(x,y, label='Data',color='red',linewidth=0,linestyle='--', alpha=1, marker='x', markersize=5, markerfacecolor='red', markeredgewidth=1, markeredgecolor='red')
+    for i in range(num_of_feat):
+        
+        # Plotting the data
+        axes.plot(x.loc[:,i],y, label='Data'+str(i),
+                  color=(np.random.sample(),np.random.sample(),np.random.sample()),linewidth=0,
+                  linestyle='-',alpha=1, marker='+', markersize=5,
+                  markeredgewidth=1)
  
-# Inserting Legend loc will set the position of the legend definning in plot(,label='Data')
-    axes.legend(loc=0) 
+        # Inserting Legend (loc will set the legend position)
+        axes.legend(loc=0) 
     
-    return
+    return axes
 
