@@ -4,11 +4,18 @@
 Created on Thu Dec 20 14:26:13 2018
 
 This file contains code that helps you get started on the
-linear exercise. You will need to complete the following functions
-in this exericse
+linear exercise in pyhton. It will cover the following parts:
+    
+   1 - WarmUpExercise - Importing files in python
+   2 - Importing dataset
+   3 - Plotting the data (data presentation)
+   4 - Gradiente descent and compute cost function for one feature
+   5 - Learning curv
+   
 
-x refers to the population size in 10,000s
-y refers to the profit in $10,000s
+The ex1_Data.txt contains information about population size in different 
+citties (First column - numbers in 10.000s) and the profit of the company in
+these citties (Second column - numbers in 10.000)
 
 @author: gabi
 """
@@ -21,84 +28,89 @@ A = wue.idenMatrix() # A will receive the 2D 5x5 array identity
 
 #%%  Part 2 - Importing and Organazing Exercise Data
 
-# In python, is normally used pandas library to import csv, txt and some traditional data format.
-# Pandas tranforms the data in a table with row and collums indexs
-# It is important to install the recommended libraries (Using anaconda, for instance: conda install sqlalchemy, lxml, xlrd, BeautifulSoup4)
+'''
+  In python, the pandas library can import different kind of file, such as: 
+  csv, txt,etc. Even we can import in different ways, pandas is insteresting
+  because its import as DataFrame. Pandas tranforms the data in a table with 
+  row and collums indexs It is important to install the recommended libraries
+  (Using anaconda, for instance: conda install sqlalchemy, lxml, xlrd,
+  BeautifulSoup4)
+'''
 
 import numpy as np
 import pandas as pd
 
+
+# Path for data file
 pathtodata = 'Exercise_Data/ex1_Data.txt'
 
-# The pd.read_csv has many tools to manipulate the files. The delimiter for separate the collums is ',' and the example file does not contain collum index
-# which pandas automaticaly put the first line as the index. For avoid this we use, header = None 
+# Importing data using Pandas (Importing as DataFrame
+data = pd.read_csv(pathtodata,delimiter = ',',header=None)
 
-data = pd.read_csv(pathtodata,delimiter = ',',header=None) # data is DataFrame object (Table format)
-
-# Variable with collum 1 index values OBS: Use two brackets to represent the 2D matrix correctly (Profit of the food truck of each city)
+# Selecting the column variable with the profits 
 y = data[[1]]
+
 # Number of training examples 
 m = len(y) 
 
-# It is important to set the variables regarding your project. Following the course we can set (x,y) and the number of training examples
-# Adding a new collum with only ones (For use Linear Regression later)
-data["new"] = np.ones(m)
+# Adding a new column to the dataset with ones values
+data["ones"] = np.ones(m)
 
-# Variable with collum index 0 values (Population of the Cities)
+# # Selecting the column variable with the population of citties 
 popci = pd.DataFrame(data.loc[:,0])
 
 #%% Part 3 - Plotting the Exercising Data
 
-# In the course, it was created a new function (plotData). However in Pyhton it is easy to import libraries. For plotting we will use matplotlib
-# which is the most popular plotting library for python (It was designed to have similar feel to MatLab's graphical plotting)
+# Check the plotData source code for details
+#import plotData as pl
 
-import plotData as pl
+#pl.plot2D(popci,y)
 
-pl.plot2D(popci,y)
-
-#%% Part 3 - Cost and Gradient descent
+#%% Part 4 - Cost funtion and gradient descent for one feature
 
 #% Setting the Collum Ones as for the future Thetha 0 multiplication
-x = data.loc[:,["new",0]]
+x = data.loc[:,["ones",0]]
 
 # Number of features (columns)
 num_of_feat = len(x.columns)
 
-# reseting the feature index
+# reseting the features index
 x.columns = list(range(num_of_feat))
 
-# Important gradient descent settings
+# Important gradient descent variables
 iterations = 1500
 alpha = 0.01
 
 # Initialize fitting parameters 
 theta0 = pd.DataFrame([0,0])
-theta1 = pd.DataFrame([-1,2])
 
-# Compute and display initial cost (Choosing the theta values)
-
+# Compute and display initial cost (Choosing the theta0 value)
 import computeCost as cc
 
-J = cc.computeCost(x,y,theta1)
+J = cc.computeCost(x,y,theta0)
 
-print("The cost function or total error using is = {0}".format(J))
-
-# Run gradient descent
-
-# Number of training examples (J_history)
-
+# Gradient Descent and Cost Function History
 import gradientDescent as gd
 
 [bestHip,Jhist] = gd.gradientDescent(x,y,theta0,alpha,iterations)
 
-import matplotlib.pyplot as plt
+#%% Part 4 - Plotting the linear regretion
 
+# Check the plotData source code for details
+import plotData as pl
+
+linReg = np.dot(x,bestHip)
+
+# Inserting the first column X0 with the ones
+# popci.insert(loc=0, column=1, value=linReg)
+
+dataplot = pl.linRegplot(popci,y,lin)
+#dataplot.plot(popci,linReg, label='Data',color='blue',linewidth=1)
+
+'''
 fig = plt.figure(figsize=(5,4),dpi=80) 
 axes = fig.add_axes([0,0,1,1])
 axes.plot(popci,y, label='Data',color='red',linewidth=0,linestyle='--', alpha=1, marker='x', markersize=5, markerfacecolor='red', markeredgewidth=1, markeredgecolor='red')
 axes.plot(popci,np.dot(x,bestHip), label='Data',color='blue',linewidth=1)
 
-
-    
-# Save the cost J in every iteration
-#Jhist = cc.computeCost(x, y, theta);
+'''

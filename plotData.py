@@ -10,21 +10,25 @@ plotting)
 @author: gabi
 """
 
-def plot2D(x,y):
+def linRegplot(x,y,linReg=0):
     
     import matplotlib.pyplot as plt
     import numpy as np
-
+    import pandas as pd
+    
+    x = pd.DataFrame(x)
+    linRegx = pd.DataFrame([0])
+    
     # Calculate the number of features (collumns)
     num_of_feat = len(x.columns)
     
-# Creatting a Figure obect (Which is interesting for manipulation) dpi changes the basic unit size
+    # Creating a Figure obect (dpi changes the basic unit size)
     fig = plt.figure(figsize=(5,4),dpi=80) 
 
-# This is will change the axis position and size! ([x point, y start point, x end point, y end point])
+    # Settubg axis position and size
     axes = fig.add_axes([0,0,1,1])
 
-# Setting title and axis labels
+    # Setting title and axis labels
     axes.set_title("Title 1")
     axes.set_xlabel("x values")
     axes.set_ylabel("y values")
@@ -33,12 +37,16 @@ def plot2D(x,y):
         
         # Plotting the data
         axes.plot(x.loc[:,i],y, label='Data'+str(i),
-                  color=(np.random.sample(),np.random.sample(),np.random.sample()),linewidth=0,
-                  linestyle='-',alpha=1, marker='+', markersize=5,
-                  markeredgewidth=1)
- 
-        # Inserting Legend (loc will set the legend position)
-        axes.legend(loc=0) 
+                  color=(np.random.sample(),np.random.sample(),
+                  np.random.sample()),linewidth=0, linestyle='-',alpha=1,
+                  marker='+', markersize=5, markeredgewidth=1)
     
+        # Inserting Legend (loc will set the legend position)
+        axes.legend(loc=0)
+        linRegx = pd.concat([linRegx,x.loc[:,i]])
+        
+    # Plotting the Linear Regression
+    axes.plot(linRegx,linReg,label='Linear_Regression',color='blue',linewidth=1)
+    axes.legend(loc=0)
     return axes
 
