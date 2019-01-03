@@ -26,4 +26,6 @@ def computeCost(x, y, theta):
     # The final cost Function
     J =  (1 / (2 * m)) * (np.sum(squaErr))
     
+    J.columns = ["J"]
+    
     return J

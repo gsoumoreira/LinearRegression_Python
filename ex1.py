@@ -61,10 +61,10 @@ popci = pd.DataFrame(data.loc[:,0])
 
 #%% Part 3 - Plotting the Exercising Data
 
-# Check the plotData source code for details
-#import plotData as pl
+# MLplot source code for details
+import MLplot as pl
 
-#pl.plot2D(popci,y)
+pl.plot2D(popci,y)
 
 #%% Part 4 - Cost funtion and gradient descent for one feature
 
@@ -94,23 +94,11 @@ import gradientDescent as gd
 
 [bestHip,Jhist] = gd.gradientDescent(x,y,theta0,alpha,iterations)
 
-#%% Part 4 - Plotting the linear regretion
+#%% Part 4 - Plotting the linear regression
 
-# Check the plotData source code for details
-import plotData as pl
+# Check the MLplot source code for details
+import MLplot as pl
 
-linReg = np.dot(x,bestHip)
+# Plotting the regression
+regplot = pl.regressionPlot(x,y,bestHip,1)
 
-# Inserting the first column X0 with the ones
-# popci.insert(loc=0, column=1, value=linReg)
-
-dataplot = pl.linRegplot(popci,y,lin)
-#dataplot.plot(popci,linReg, label='Data',color='blue',linewidth=1)
-
-'''
-fig = plt.figure(figsize=(5,4),dpi=80) 
-axes = fig.add_axes([0,0,1,1])
-axes.plot(popci,y, label='Data',color='red',linewidth=0,linestyle='--', alpha=1, marker='x', markersize=5, markerfacecolor='red', markeredgewidth=1, markeredgecolor='red')
-axes.plot(popci,np.dot(x,bestHip), label='Data',color='blue',linewidth=1)
-
-'''

@@ -31,6 +31,9 @@ def featureNormalize(x):
     import pandas as pd
     import numpy as np
 
+    # Getting the Header information
+    head = list(x.columns)
+
     # Calculate the number of features (columns)
     num_of_feat = len(x.columns)
     
@@ -46,8 +49,15 @@ def featureNormalize(x):
    
     for i in range(num_of_feat):
 
-        # The x input data normalized 
-        x_norm.loc[:,i]  = (x.loc[:,i]-x_mean.loc[i,0])/(x_std.loc[i,0])
-
+        # Feature scalling for each feature
+        x_norm.iloc[:,i]  = (x.iloc[:,i]-x_mean.iloc[i,0])/(x_std.iloc[i,0])
+    
+    # Setting the same feature index for the output
+    x_norm.columns = head
+    
+    # Mean and Standard head index
+    x_mean.columns = ["X_mean"]
+    x_std.columns = ["X_std"]
+    
     return [x_norm, x_mean, x_std]
 

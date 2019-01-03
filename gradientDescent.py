@@ -32,11 +32,17 @@ def gradientDescent(x, y, theta, alpha, num_iters):
         # Theta0 and theta 1 calculation
         for d in range(num_of_feat):
             
-            # Wise multiplication (gen_term*theta1)
-            term.loc[:,d] = gen_term.mul(x.loc[:,d],axis=0)
-            theta.loc[d,:] =  theta.loc[d,:] - ((alpha/m) * np.sum(term.loc[:,d]))
+        # Element Wise multiplication (gen_term*theta1)
+            term.loc[:,d] = gen_term.mul(x.iloc[:,d],axis=0)
+        
+        # Compute the gradient descent
+            theta.iloc[d,:] =  theta.iloc[d,:] - ((alpha/m) * np.sum(term.iloc[:,d]))
 
         # Cost function History
-        Jhist.loc[i,0] = float(cc.computeCost(x,y,theta))
+        Jhist.iloc[i,0] = float(cc.computeCost(x,y,theta))
+    
+    # Mean and Standard head index
+    theta.columns = ["Theta"]
+    Jhist.columns = ["Jhist"]
 
     return [theta,Jhist]
