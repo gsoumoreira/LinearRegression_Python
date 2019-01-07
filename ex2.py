@@ -21,7 +21,7 @@ of the house.
 @author: gabi
 """
 
-#%%  Part 1 - Importing and Organazing Exercise Data
+#%%  Part 1 - Importing and Organazing Data
 
 '''
   In python, the pandas library can import different kind of file, such as: 
@@ -41,14 +41,9 @@ pathtodata = 'Exercise_Data/ex1_Data2.txt'
 data = pd.read_csv(pathtodata,delimiter = ',',header=None)
 
 # Variable with collum 1 index values OBS: Use two brackets to represent the 2D matrix correctly (Profit of the food truck of each city)
-x = data[[0,1]]
-y = data[[2]]
 
-# Insert the quadratic function of column X1 (Check the polyregression)
-x.insert(loc=0, column="X1^2", value=x.iloc[:,0]**2)
-
-# Choose the header feature index
-x.columns = ['X1^2','X1','X2']
+x = data[[0,1]] # Size of the house and (X0) and number of bedrooms (X1)
+y = data[[2]] # Price of houses in Port-land
 
 # Number of training examples 
 m = len(y)
@@ -79,7 +74,7 @@ num_of_feat = len(x_norm.columns)
 num_of_train = len(x_norm)
 
 # Choose the header feature index
-x_norm.columns = ['X0','X1^2','X1','X2']
+x_norm.columns = ['X0','X1','X2']
 
 # Variables for Gradient Descent
 alpha = 0.01
@@ -97,9 +92,9 @@ iterations.columns = ['Iter']
 
 # Plot the learning curve (alpha is the varia)
 Leacur_plot = pl.plot2D(iterations,Jhist)
+dataPlot.set_title("Learning Curve")
 
 #%% Part 6 - Plotting the Regression
 
-reg_plot = pl.regressionPlot(x_norm,y,theta,2)
+reg_plot = pl.regressionPlot(x_norm,y,theta,1)
 reg_plot.set_title("Linear Regression")
-
