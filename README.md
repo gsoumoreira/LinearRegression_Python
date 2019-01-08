@@ -19,6 +19,6 @@ data = pd.read_csv(pathtodata,delimiter = ',',header=None)
 
 The cost function **(J)** or loss function represents the distance of its hypothesis (in these exercises, linear hypothesis) with the real data. Therefore, the higher the cost function value, the lower the correlation between the hypothesis and the data. The cost function is represented by **equation (1)**:
 
-<a href="https://www.codecogs.com/eqnedit.php?latex=$$J(\theta)=\frac{1}{2m}\sum_{i=1}^{m}(h_\theta(x^{(i)}-y^{(i)})^2$$" target="_blank"><img src="https://latex.codecogs.com/png.latex?$$J(\theta)=\frac{1}{2m}\sum_{i=1}^{m}(h_\theta(x^{(i)}-y^{(i)})^2$$" title="$$J(\theta)=\frac{1}{2m}\sum_{i=1}^{m}(h_\theta(x^{(i)}-y^{(i)})^2$$" /></a>
+$$J(\theta)=\frac{1}{2m}\sum_{i=1}^{m}(h_\theta(x^{(i)}-y^{(i)})^2$$
 
-Onde <a href="https://www.codecogs.com/eqnedit.php?latex=\inline&space;$x^{(i)}$" target="_blank"><img src="https://latex.codecogs.com/png.latex?\inline&space;$x^{(i)}$" title="$x^{(i)}$" /></a> são os dados escolhidos para hOnde a hipótese é dado pela equação linear (2):
+Onde $x^{(i)}$ são os dados escolhidos para hOnde a hipótese é dado pela equação linear (2):
