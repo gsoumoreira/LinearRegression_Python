@@ -20,3 +20,5 @@ data = pd.read_csv(pathtodata,delimiter = ',',header=None)
 The cost function **(J)** or loss function represents the distance of its hypothesis (in these exercises, linear hypothesis) with the real data. Therefore, the higher the cost function value, the lower the correlation between the hypothesis and the data. The cost function is represented by **equation (1)**:
 
 $$J(\theta)=\frac{1}{2m}\sum_{i=1}^{m}(h_\theta(x^{(i)}-y^{(i)})^2$$
+
+Onde $x^{(i)}$ são os dados escolhidos para hOnde a hipótese é dado pela equação linear (2):
