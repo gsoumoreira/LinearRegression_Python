@@ -16,14 +16,15 @@ from sklearn import preprocessing
 import pandas as pd 
 
 # Path to data file
-pathtodata = 'Exercise_Data/ex1_Data2.txt'
+pathtodata = 'Exercise_Data/ex2_Data.txt'
 
 # Importing the Data as DataFrame (header = None)-not include the feature index
 data = pd.read_csv(pathtodata,delimiter = ',',header=None)
 
 # Variable with collum 1 index values OBS: Use two brackets to represent the 2D matrix correctly (Profit of the food truck of each city)
-x = data[[0,1]]
-y = data[[2]]
+
+x = data[[0,1]] # Size of the house and (X0) and number of bedrooms (X1)
+y = data[[2]] # Price of houses in Port-land
 
 min_max_scaler = preprocessing.MinMaxScaler()
 x_norm = pd.DataFrame(preprocessing.scale(x))

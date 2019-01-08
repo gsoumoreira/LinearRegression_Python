@@ -16,12 +16,23 @@ def gradientDescent(x, y, theta, alpha, num_iters):
     import pandas as pd
     import computeCost as cc
     
-    # Initial parameters for gradient descent calculation
+    # Lenght of y
     m = len(y)
+    
+    # List witn the number of iterations
     iterations = list(range(num_iters))
-    Jhist = pd.DataFrame(iterations)
+    
+    # Number of features
     num_of_feat = len(x.columns)
+    
+    # Gradient descent term creation
     term = pd.DataFrame(np.zeros([m,num_of_feat]))
+    
+    # Jhist variable creation
+    Jhist = pd.DataFrame(iterations)
+    
+    # thetahist variable creation
+    thetahist = pd.DataFrame(np.zeros([num_iters,num_of_feat]))
     
     # Gradiante descent for iterations 
     for i in range(num_iters):
@@ -32,17 +43,20 @@ def gradientDescent(x, y, theta, alpha, num_iters):
         # Theta0 and theta 1 calculation
         for d in range(num_of_feat):
             
-        # Element Wise multiplication (gen_term*theta1)
+            # Element Wise multiplication (gen_term*theta1)
             term.loc[:,d] = gen_term.mul(x.iloc[:,d],axis=0)
         
-        # Compute the gradient descent
+            # Compute the gradient descent
             theta.iloc[d,:] =  theta.iloc[d,:] - ((alpha/m) * np.sum(term.iloc[:,d]))
-
+        
+            # Compute the theta history
+            thetahist.iloc[i,d] = float(theta.iloc[d,:])
+        
         # Cost function History
         Jhist.iloc[i,0] = float(cc.computeCost(x,y,theta))
-    
+        
     # Mean and Standard head index
     theta.columns = ["Theta"]
     Jhist.columns = ["Jhist"]
-
-    return [theta,Jhist]
+    
+    return [theta,Jhist,thetahist]

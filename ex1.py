@@ -3,14 +3,16 @@
 """
 Created on Thu Dec 20 14:26:13 2018
 
-This file contains code that helps you get started on the
-linear exercise in pyhton. It will cover the following parts:
+This file contains code for the ex1 - linear regression exercise in pyhton.
+It will cover the following parts:
     
    1 - WarmUpExercise - Importing files in python
-   2 - Importing dataset
+   2 - Importing dataset Organazing Data
    3 - Plotting the data (data presentation)
    4 - Gradiente descent and compute cost function for one feature
-   5 - Learning curv
+   5 - Estimate the profit for different values
+   6 - Linear Regression plot
+   7 - Cost Function plot with different theta values
    
 
 The ex1_Data.txt contains information about population size in different 
@@ -26,20 +28,10 @@ import warmUpExercise as wue
 
 A = wue.idenMatrix() # A will receive the 2D 5x5 array identity
 
-#%%  Part 2 - Importing and Organazing Exercise Data
-
-'''
-  In python, the pandas library can import different kind of file, such as: 
-  csv, txt,etc. Even we can import in different ways, pandas is insteresting
-  because its import as DataFrame. Pandas tranforms the data in a table with 
-  row and collums indexs It is important to install the recommended libraries
-  (Using anaconda, for instance: conda install sqlalchemy, lxml, xlrd,
-  BeautifulSoup4)
-'''
+#%%  Part 2 - Importing and Organazing Data
 
 import numpy as np
 import pandas as pd
-
 
 # Path for data file
 pathtodata = 'Exercise_Data/ex1_Data.txt'
@@ -56,8 +48,11 @@ m = len(y)
 # Adding a new column to the dataset with ones values
 data["ones"] = np.ones(m)
 
-# # Selecting the column variable with the population of citties 
-popci = pd.DataFrame(data.loc[:,0])
+# Choose the header feature index
+data.columns = ['X1','Y','X0']
+
+# Selecting the column variable with the population of citties 
+popci = pd.DataFrame(data.loc[:,'X1'])
 
 #%% Part 3 - Plotting the Exercising Data
 
@@ -68,37 +63,60 @@ pl.plot2D(popci,y)
 
 #%% Part 4 - Cost funtion and gradient descent for one feature
 
-#% Setting the Collum Ones as for the future Thetha 0 multiplication
-x = data.loc[:,["ones",0]]
-
-# Number of features (columns)
-num_of_feat = len(x.columns)
-
-# reseting the features index
-x.columns = list(range(num_of_feat))
+# Setting the Features for linear regression
+x = data.loc[:,['X0','X1']]
 
 # Important gradient descent variables
-iterations = 1500
-alpha = 0.01
+iterations = 1500 # Number of iterations
+alpha = 0.01 # Learning rate
 
 # Initialize fitting parameters 
 theta0 = pd.DataFrame([0,0])
 
-# Compute and display initial cost (Choosing the theta0 value)
+# Compute and display initial cost (Choosing theta0)
 import computeCost as cc
 
 J = cc.computeCost(x,y,theta0)
 
-# Gradient Descent and Cost Function History
+# Gradient Descent, Cost Function History and Theta History
 import gradientDescent as gd
 
-[bestHip,Jhist] = gd.gradientDescent(x,y,theta0,alpha,iterations)
+[bestHip,Jhist,thetahist] = gd.gradientDescent(x,y,theta0,alpha,iterations)
 
-#%% Part 4 - Plotting the linear regression
+#%% Part 5 - Estimate the profit for different x values
 
-# Check the MLplot source code for details
-import MLplot as pl
+predict1 = np.dot(np.transpose(pd.DataFrame([1, 3.5])),bestHip)
+predict2 = np.dot(np.transpose(pd.DataFrame([1,7])),bestHip)
 
-# Plotting the regression
+#%% Part 6 - Plotting the Linear Regression
+
+# Check the MLplot source code for regressionPlot details
 regplot = pl.regressionPlot(x,y,bestHip,1)
 
+# Setting the title and axis label
+regplot.set_title('Linear Regression')
+regplot.set_xlabel('Population in 10.000s')
+regplot.set_ylabel('Profit in $10.000s')
+
+#%% Part 7 - Cost Function plot with different theta values
+
+# Setting theta_0 and theta_1 variation values
+T0 = pd.DataFrame(np.linspace(-10,10,100))
+T1 = pd.DataFrame(np.linspace(-1,4,100))
+
+# Initialize the Cost function variable for 3D plot
+J_vals = pd.DataFrame(np.zeros([len(T0),len(T1)]))
+
+#Compute the new J_vals values
+for i in list(range(len(T0))):
+    for j in list(range(len(T1))):
+         t = pd.DataFrame([float(T0.iloc[i,:]), float(T1.iloc[j,:])])
+         J_vals.iloc[i,j] = float(cc.computeCost(x, y, t))
+
+# Check the MLplot source code for plot3D details
+Jplot = pl.plot3D(T0,T1,J_vals)
+
+# Setting the title and axis label
+Jplot.set_xlabel(r'$\theta_0$')
+Jplot.set_ylabel(r'$\theta_1$')
+Jplot.set_zlabel(r"J($\theta$)")

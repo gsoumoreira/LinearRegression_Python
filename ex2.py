@@ -23,19 +23,10 @@ of the house.
 
 #%%  Part 1 - Importing and Organazing Data
 
-'''
-  In python, the pandas library can import different kind of file, such as: 
-  csv, txt,etc. Even we can import in different ways, pandas is insteresting
-  because its import as DataFrame. Pandas tranforms the data in a table with 
-  row and collums indexs. It is important to install the recommended libraries
-  (Using anaconda, for instance: conda install sqlalchemy, lxml, xlrd,
-  BeautifulSoup4)
-'''
-
 import pandas as pd 
 
 # Path to data file
-pathtodata = 'Exercise_Data/ex1_Data2.txt'
+pathtodata = 'Exercise_Data/ex2_Data.txt'
 
 # Importing the Data as DataFrame (header = None)-not include the feature index
 data = pd.read_csv(pathtodata,delimiter = ',',header=None)
@@ -82,7 +73,7 @@ num_iters = 400
 theta_0 = pd.DataFrame(np.zeros([num_of_feat,1]))
 
 # Gradient Descent and Cost Function History
-[theta,Jhist] = gd.gradientDescent(x_norm,y,theta_0,alpha,num_iters)
+[theta,Jhist,thetahist] = gd.gradientDescent(x_norm,y,theta_0,alpha,num_iters)
 
 #%% Part 5 - Plotting the Learning Curve
 

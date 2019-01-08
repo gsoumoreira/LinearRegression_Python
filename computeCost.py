@@ -17,7 +17,7 @@ def computeCost(x, y, theta):
     # Initializing the cost variable 
     J = 0
     
-    # Hypothesis function ((97x2) . theta(2x1) = theta_0 + theta_1 * x_1) 
+    # Hypothesis function (ex1 = theta_0 * x_0 + theta_1 * x_1) 
     hip = np.dot(x,theta) 
     
     # Compute squared error for each y
