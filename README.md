@@ -26,14 +26,13 @@ The cost function **(J)** or loss function represents the distance of its hypoth
 </body>
 </html>
 
-The superscript _(i)_ represents the row number of the data. Where the hypothesis <a href="https://www.codecogs.com/eqnedit.php?latex=\inline&space;$h_\theta$" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\inline&space;$h_\theta$" title="$h_\theta$" /></a> is given by the linear equation (2):
+The superscript _(i)_ represents the row number of the data. Where the hypothesis<a href="https://www.codecogs.com/eqnedit.php?latex=\inline&space;$h_\theta$" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\inline&space;$h_\theta$" title="$h_\theta$" /></a> is given by the linear equation (2):
 
 <html>
 <p>
 <body>
     <div align="center">
-<a 
-href="https://www.codecogs.com/eqnedit.php?latex=\inline&space;h_\theta=\theta^T&space;x&space;=&space;\theta_0&space;x_0&plus;&space;\theta_n&space;x_n" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\inline&space;h_\theta=\theta^T&space;x&space;=&space;\theta_0&space;x_0&plus;&space;\theta_n&space;x_n" title="h_\theta=\theta^T x = \theta_0 x_0+ \theta_n x_n" /></a>  (2)
+<a href="https://www.codecogs.com/eqnedit.php?latex=\inline&space;$$h_\theta=\theta^T&space;x&space;=&space;\theta_0&space;x_0&plus;&space;\theta_n&space;x_n$$" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\inline&space;$$h_\theta=\theta^T&space;x&space;=&space;\theta_0&space;x_0&plus;&space;\theta_n&space;x_n$$" title="$$h_\theta=\theta^T x = \theta_0 x_0+ \theta_n x_n$$" /></a> (2)
     </div>
 </body>
 </html>
