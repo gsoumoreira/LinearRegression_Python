@@ -94,7 +94,7 @@ The parameter <a href="https://www.codecogs.com/eqnedit.php?latex=\inline&space;
 </body>
 <body>
     <div align="center">
-   Figure 1 - Learning curve for different values of alpha<p>
+   Figure 2 - Learning curve for different values of alpha<p>
     </div>
 </body>
 </html>
