@@ -3,17 +3,18 @@
 """
 Created on Thu Dec 20 14:26:13 2018
 
-This file contains code that helps you get started on the
-linear exercise in pyhton. It will cover the following parts:
+Exercise 2 -linear regression for n-features in pyhton. It will cover the
+following parts:
     
    1 - Importing dataset
    2 - Feature normalization
    3 - Plotting the data normalized (data presentation)
    4 - Gradiente descent and compute cost function for n-features
    5 - Learning curve
+   6 - Plotting the Linear Regression
    
 
-The ex1_Data2.txt contains a training set of housing prices in Port-land,
+The ex2_Data.txt contains a training set of housing prices in Port-land,
 Oregon. The first column is the size of the house (in square feet), the
 second column is the number of bedrooms, and the third column is the price
 of the house.
@@ -33,7 +34,10 @@ data = pd.read_csv(pathtodata,delimiter = ',',header=None)
 
 # Variable with collum 1 index values OBS: Use two brackets to represent the 2D matrix correctly (Profit of the food truck of each city)
 
-x = data[[0,1]] # Size of the house and (X0) and number of bedrooms (X1)
+# Size of the house and (X1) and number of bedrooms (X2)
+x = data[[0,1]]
+x.columns = ['X1','X2']
+
 y = data[[2]] # Price of houses in Port-land
 
 # Number of training examples 
@@ -47,10 +51,13 @@ import featureNormalize as fn
 
 #%% Part 3 - Plotting the Data Normalized 
 
+# Please check the MLplot source code for details
 import MLplot as pl
 
 dataPlot = pl.plot2D(x_norm,y)
 dataPlot.set_title("Profit and Population")
+dataPlot.set_xlabel('Size of the house and (X1) and number of bedrooms (X2)')
+dataPlot.set_ylabel('Price of the house ($)')
 
 #%% Part 4 - Gradient Descent for n-Features
 
@@ -58,17 +65,16 @@ import numpy as np
 import gradientDescent as gd
 
 # Inserting the first column X0 with the ones
-x_norm.insert(loc=0, column=3, value=np.ones(m))
+x_norm.insert(loc=0, column='X0', value=np.ones(m))
 
 # Calculate the number of features (columns) and rows (training examples)
 num_of_feat = len(x_norm.columns)
 num_of_train = len(x_norm)
 
 # Choose the header feature index
-x_norm.columns = ['X0','X1','X2']
 
 # Variables for Gradient Descent
-alpha = 0.01
+alpha = 0.1
 num_iters = 400
 theta_0 = pd.DataFrame(np.zeros([num_of_feat,1]))
 
@@ -81,11 +87,16 @@ theta_0 = pd.DataFrame(np.zeros([num_of_feat,1]))
 iterations = pd.DataFrame(list(range(num_iters)))
 iterations.columns = ['Iter']
 
-# Plot the learning curve (alpha is the varia)
+# Plot the learning curve (alpha is the variable)
 Leacur_plot = pl.plot2D(iterations,Jhist)
-dataPlot.set_title("Learning Curve")
+Leacur_plot.set_title(r'Learning curve for $\alpha$={0}'.format(alpha))
+Leacur_plot.set_xlabel('Iterations')
+Leacur_plot.set_ylabel('Cost Function')
 
 #%% Part 6 - Plotting the Regression
 
+# Check the MLplot source code for regressionPlot details
 reg_plot = pl.regressionPlot(x_norm,y,theta,1)
 reg_plot.set_title("Linear Regression")
+reg_plot.set_xlabel('Size of the house normalized')
+reg_plot.set_ylabel('Price of the house ($)')

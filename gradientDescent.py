@@ -25,7 +25,7 @@ def gradientDescent(x, y, theta, alpha, num_iters):
     # Number of features
     num_of_feat = len(x.columns)
     
-    # Gradient descent term creation
+    # Gradient descent term initialization ((h(x)-y)*x)
     term = pd.DataFrame(np.zeros([m,num_of_feat]))
     
     # Jhist variable creation
