@@ -46,7 +46,7 @@ The gradient descent is one of the methods to optimize the hypothesis, in other 
 <p>
 <body>
     <div align="center">
-<a href="https://www.codecogs.com/eqnedit.php?latex=\inline&space;\theta_j:=\theta_j&space;&plus;\alpha\frac{1}{m}\sum_{i=1}^{m}(h_\theta(x^{(i)})-y^{(i)})x_j^{(i)}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\inline&space;\theta_j:=\theta_j&space;&plus;\alpha\frac{1}{m}\sum_{i=1}^{m}(h_\theta(x^{(i)})-y^{(i)})x_j^{(i)}" title="\theta_j:=\theta_j +\alpha\frac{1}{m}\sum_{i=1}^{m}(h_\theta(x^{(i)})-y^{(i)})x_j^{(i)}" /></a> (3)
+<a href="https://www.codecogs.com/eqnedit.php?latex=\inline&space;\theta_j:=\theta_j&space;&minus;\alpha\frac{1}{m}\sum_{i=1}^{m}(h_\theta(x^{(i)})-y^{(i)})x_j^{(i)}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\inline&space;\theta_j:=\theta_j&space;&plus;\alpha\frac{1}{m}\sum_{i=1}^{m}(h_\theta(x^{(i)})-y^{(i)})x_j^{(i)}" title="\theta_j:=\theta_j +\alpha\frac{1}{m}\sum_{i=1}^{m}(h_\theta(x^{(i)})-y^{(i)})x_j^{(i)}" /></a> (3)
     </div>
 </body>
 </html>
